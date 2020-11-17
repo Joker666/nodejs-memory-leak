@@ -17,6 +17,7 @@ function noClosure() {
     function closureFunc() {
         return cFoo;
     }
+    cBaz = null;
     return closureFunc;
 }
 
