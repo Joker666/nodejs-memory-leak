@@ -7,17 +7,8 @@ async function wait (ms) {
 function computeTerm(term) {
     return computeTerm[term] || (computeTerm[term] = compute());
     function compute() {
-        return new Array(10000).join("*");
+        return Buffer.alloc(1e3);
     }
-}
-
-function noClosure() {
-    var cFoo = 900;
-    var cBaz = new Array(10000).join("*");
-    function closureFunc() {
-        return cFoo;
-    }
-    return closureFunc;
 }
 
 var theThing = null;
@@ -42,12 +33,6 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify(requestLogs));
             break;
         case "/closures":
-            var closure = noClosure();
-            closure();
-            res.writeHead(200);
-            res.end("Hello World");
-            break;
-        case "/closures2":
             replaceThing();
             res.writeHead(200);
             res.end("Hello World");
