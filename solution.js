@@ -7,7 +7,7 @@ function computeTerm(term) {
     return computeTerm[term] || (computeTerm[term] = compute());
 
     function compute() {
-        return new Array(10000).join("*");
+        return Buffer.alloc(1e3);
     }
 }
 
@@ -43,7 +43,7 @@ const server = http.createServer((req, res) => {
             break;
         case "/promise":
             // Only solution is increase ram in the machine, or
-            // Use a queue to hanle the long running tasks
+            // Use a queue to handle the long running tasks
             break;
         default:
             res.writeHead(404);

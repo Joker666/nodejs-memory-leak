@@ -17,7 +17,7 @@ npm i autocannon -g
 npm i clinic -g
 ```
 
-After that run the `up.sh` script with flags to start load testing and capturing heap data at the same time. The possible values for `-m` are `global`, `closures`, `cache`, `promise`
+After that run the `run.sh` script with flags to start load testing and capturing heap data at the same time. The possible values for `-m` are `global`, `closures`, `cache`, `promise`
 
 ```bash
 ./run.sh -f index.js -m cache -d 20
