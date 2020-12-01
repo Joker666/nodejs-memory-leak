@@ -1,5 +1,21 @@
 const http = require("http");
 
+async function task (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function timeout(timer) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, timer)
+    });
+}
+
 function computeTerm(term) {
     setTimeout(() => {
         delete computeTerm[term];
@@ -42,8 +58,9 @@ const server = http.createServer((req, res) => {
             res.end(computeTerm(Math.random()));
             break;
         case "/promise":
-            // Only solution is increase ram in the machine, or
-            // Use a queue to handle the long running tasks
+            Promise.race([task(getRndInteger(100, 20000)), timeout(500)]);
+            res.writeHead(200);
+            res.end("Hello World");
             break;
         default:
             res.writeHead(404);

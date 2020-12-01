@@ -1,7 +1,11 @@
 const http = require("http");
 
-async function wait (ms) {
+async function task (ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 function computeTerm(term) {
@@ -41,11 +45,7 @@ const server = http.createServer((req, res) => {
             res.end(computeTerm(Math.random()));
             break;
         case "/promise":
-            async function here(duration) {
-                await wait(duration);
-            }
-            here(3000);
-            here(5000);
+            task(getRndInteger(100, 20000));
             res.writeHead(200);
             res.end("Hello World");
             break;
